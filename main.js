@@ -359,7 +359,7 @@ function initCode() {
         editing = false;
         $("#editor-container").toggle();
 	var code = "#include <Arduino.h>\n" + editor.getValue();
-        worker = new Worker("picoc.js");
+        worker = new Worker("picoc.min.js");
 	console.log("started worker!");
         worker.onmessage = function(event) {
             if ("pin" in event.data && "brightness" in event.data) {
