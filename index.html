@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Light Sculpture Simulator</title>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="lib/jquery.min.js"></script>
+    <script type="text/javascript" src="lib/three.min.js"></script>
+    <script type="text/javascript" src="lib/OrbitControls.js"></script>
+    <script type="text/javascript" src="lib/q.min.js"></script>
+    <script type="text/javascript" src="lib/bootstrap.min.js"></script>
+    <script type="text/javascript" src="lib/ace.js"></script>
+    <script type="text/javascript" src="lib/ace-mode-c_cpp.js"></script>
+    <script type="text/javascript" src="lib/ace-theme-solarized_dark.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+  </head>
+  <body>
+    <script id="rod-template" type="text/templateshtuff">
+      <tr class="rod-row">
+        <td><button data-i="{i}" type="button" class="delete-rod btn btn-danger btn-xs">
+            <span class="glyphicon glyphicon-trash"></span></button></td>
+        <td><input class="rod-val radius" data-i="{i}" value="{r}" type="text"><br>
+          <input class="rod-slider radius" data-i="{i}" value="{r}" type="range" min="0" max="5.7" step="0.01"></td>
+        <td><input class="rod-val theta" data-i="{i}" value="{theta}" type="text"><br>
+          <input class="rod-slider theta" data-i="{i}" value="{theta}" type="range" min="0" max="360" step="1"></td>
+        <td><input class="rod-val height" data-i="{i}" value="{height}" type="text"><br>
+          <input class="rod-slider height" data-i="{i}" value="{height}" type="range" min="2" max="7.5" step="0.01"></td>
+        <td><select class="rod-val color" data-i="{i}">
+            <option>R</option>
+            <option>G</option>
+            <option>B</option>
+            <option>O</option>
+            <option>Y</option>
+            <option>W</option>
+        </select></td>
+      </tr>
+    </script>
+    <script id="pole-template" type="text/templateshtuff">
+      <div id="edit-pole{i}" data-i="{i}" class="panel panel-default edit-pole">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a class="accordion-toggle in" data-toggle="collapse" href="#editing-pole{i}">
+              Pole
+            </a>
+            at (<input class="pole-pos pole-x" data-i="{i}" type="text" value="{x}">,
+            <input class="pole-pos pole-y" data-i="{i}" type="text" value="{y}">)
+            <button data-i="{i}" type="button" class="add-rod btn btn-success btn-xs">
+              <span class="glyphicon glyphicon-plus"></span> Add Rod
+            </button>
+          </h4>
+        </div>
+        <div id="editing-pole{i}" class="panel-collapse in">
+          <div class="panel-body" id="thing">
+            <button data-i="{i}" type="button" class="delete-pole btn btn-danger btn-xs">
+              <span class="glyphicon glyphicon-trash"></span> Delete this Pole
+            </button>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th><span class="glyphicon glyphicon-trash"></span></th>
+                  <th>r</th>
+                  <th>&#120579;</th>
+                  <th>height</th>
+                  <th>color</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </script>
+    <div id="glcanvas">
+    </div>
+    <a type="button" class="btn btn-primary btn-large" id="edit-code">Edit code</a>
+    <div id="edit-rods" class="panel panel-primary">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a class="accordion-toggle" data-toggle="collapse" href="#editing-rods">
+            Edit&nbsp;
+          </a>
+          <select id="select-design">
+          </select>
+          <button id="add-pole" type="button" class="btn btn-success btn-xs">
+            <span class="glyphicon glyphicon-plus"></span> Add Pole
+          </button>
+        </h4>
+      </div>
+      <div id="editing-rods" class="panel-collapse in">
+        <div class="panel-body" id="edit-rods-content">
+          <label>
+            Rename:
+            <input id="rename-design" type="text">
+          </label>
+          <button id="delete-design" type="button" class="delete-design btn btn-danger btn-xs">
+            <span class="glyphicon glyphicon-trash"></span> Delete this Design
+          </button>
+          <div id="render-poles-check" class="checkbox">
+            <label>
+              <input type="checkbox" checked>
+              Render poles
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="editor-container">
+      <div id="editor-inner-container">
+	<div id="editor"></div>
+	<button id="run-btn" type="button" class="btn btn-primary">Run</button>
+      </div>
+    </div>
+  </body>
+</html>
