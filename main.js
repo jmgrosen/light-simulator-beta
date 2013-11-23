@@ -364,6 +364,8 @@ function initCode() {
         worker.onmessage = function(event) {
             if ("pin" in event.data && "brightness" in event.data) {
                 setRodBrightness(event.data.pin, event.data.brightness);
+            } else if ("msg" in event.data) {
+                console.log(event.data.msg);
             } else {
                 console.log("received message");
                 console.log(event);
